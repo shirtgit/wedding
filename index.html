@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Kakao Map API -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa80a098009eb02b3a149f9811db7116"></script>
 </head>
 <body class="bg-gray-50 antialiased">
 
@@ -254,15 +256,7 @@
                 <!-- 지도 -->
                 <div class="order-2 lg:order-1" data-aos="fade-right" data-aos-delay="200">
                     <div class="map-section">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3173.5736766850844!2d126.6513877153251!3d37.386004779828454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356829a7a6e56a5b%3A0xa1b8e3b7e7c75d4f!2z7Iah7LKc6rWt7Iq57IKw7JuQ7IKs67aA6rSA!5e0!3m2!1sko!2skr!4v1700000000000!5m2!1sko!2skr"
-                            width="100%"
-                            height="100%"
-                            style="border:0;"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                        <div id="kakao-map" style="width:100%;height:400px;"></div>
                     </div>
                 </div>
                 
@@ -487,5 +481,37 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>
+    
+    <!-- Kakao Map Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var mapContainer = document.getElementById('kakao-map');
+        if (mapContainer) {
+            var mapOption = { 
+                center: new kakao.maps.LatLng(37.388536, 126.647025), // 지도의 중심좌표
+                level: 4 // 지도의 확대 레벨
+            };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+                imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+                imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+              
+            // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                markerPosition = new kakao.maps.LatLng(37.388536, 126.647025); // 마커가 표시될 위치입니다
+
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                position: markerPosition, 
+                image: markerImage // 마커이미지 설정 
+            });
+
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);  
+        }
+    });
+    </script>
 </body>
 </html>
