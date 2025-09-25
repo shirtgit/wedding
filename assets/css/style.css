@@ -25,6 +25,17 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Cherry Blossom Canvas */
+#cherry-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
 body {
     font-family: 'Noto Serif KR', serif;
     color: var(--primary-color);

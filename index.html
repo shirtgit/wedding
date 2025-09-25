@@ -19,6 +19,9 @@
 </head>
 <body class="bg-gray-50 antialiased">
 
+    <!-- Cherry Blossom Canvas -->
+    <canvas id="cherry-canvas"></canvas>
+
     <!-- 1. 히어로 영역 -->
     <section class="hero-section flex items-center justify-center text-white relative overflow-hidden"
              style="background: linear-gradient(135deg, #f5f1eb 0%, #e8ddd4 100%);">
@@ -252,7 +255,7 @@
                 <div class="order-2 lg:order-1" data-aos="fade-right" data-aos-delay="200">
                     <div class="map-section">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1583.185695279644!2d126.687412!3d37.416595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35682855b706f9d3%3A0x7d0a21a8f9d0c6b1!2s37.416595%2C%20126.687412!5e0!3m2!1sen!2skr!4v1700000000000!5m2!1sen!2skr"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3173.5736766850844!2d126.6513877153251!3d37.386004779828454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x356829a7a6e56a5b%3A0xa1b8e3b7e7c75d4f!2z7Iah7LKc6rWt7Iq57IKw7JuQ7IKs67aA6rSA!5e0!3m2!1sko!2skr!4v1700000000000!5m2!1sko!2skr"
                             width="100%"
                             height="100%"
                             style="border:0;"
@@ -266,14 +269,14 @@
                 <!-- 장소 정보 -->
                 <div class="order-1 lg:order-2 space-y-6" data-aos="fade-left" data-aos-delay="400">
                     <div class="location-info">
-                        <h3 class="text-2xl font-medium text-stone-800 mb-4">그랜드컨벤션센터</h3>
+                        <h3 class="text-2xl font-medium text-stone-800 mb-4">송도컨벤시아</h3>
                         <div class="space-y-4">
                             <div class="flex items-start">
                                 <i class="fas fa-map-marker-alt text-rose-300 mt-1 mr-3"></i>
                                 <div>
                                     <p class="text-stone-700 font-medium">주소</p>
-                                    <p class="text-stone-600">인천광역시 연수구 송도국제대로 123</p>
-                                    <p class="text-stone-600">3층 그랜드홀</p>
+                                    <p class="text-stone-600">인천광역시 연수구 센트럴로 123</p>
+                                    <p class="text-stone-600">그랜드볼룸 3층</p>
                                 </div>
                             </div>
                             
@@ -281,7 +284,7 @@
                                 <i class="fas fa-phone text-rose-300 mt-1 mr-3"></i>
                                 <div>
                                     <p class="text-stone-700 font-medium">연락처</p>
-                                    <p class="text-stone-600">032-123-4567</p>
+                                    <p class="text-stone-600">032-210-1114</p>
                                 </div>
                             </div>
                             
@@ -289,7 +292,8 @@
                                 <i class="fas fa-parking text-rose-300 mt-1 mr-3"></i>
                                 <div>
                                     <p class="text-stone-700 font-medium">주차 안내</p>
-                                    <p class="text-stone-600">건물 지하 1-3층 무료 주차</p>
+                                    <p class="text-stone-600">지하 1-4층 무료 주차 (4시간)</p>
+                                    <p class="text-stone-500 text-sm mt-1">주차권은 웨딩홀에서 인증</p>
                                 </div>
                             </div>
                         </div>
@@ -302,8 +306,9 @@
                             지하철 이용시
                         </h4>
                         <ul class="space-y-2 text-sm text-stone-600">
-                            <li>• 인천지하철 1호선 센트럴파크역 3번 출구 (도보 5분)</li>
-                            <li>• 수인·분당선 인천대입구역 1번 출구 (도보 10분)</li>
+                            <li>• 인천지하철 1호선 국제업무지구역 2번 출구 (도보 3분)</li>
+                            <li>• 인천지하철 1호선 센트럴파크역 4번 출구 (도보 8분)</li>
+                            <li>• 공항철도 운서역에서 셔틀버스 이용</li>
                         </ul>
                         
                         <h4 class="font-medium text-stone-800 mb-4 mt-6 flex items-center">
@@ -311,9 +316,19 @@
                             버스 이용시
                         </h4>
                         <ul class="space-y-2 text-sm text-stone-600">
-                            <li>• 일반버스: 6-1, 16, 27, 908번</li>
-                            <li>• 광역버스: M6405, 1400번</li>
-                            <li>• 센트럴파크 정류장 하차</li>
+                            <li>• 일반버스: 6-1번, 16번, 27번</li>
+                            <li>• 광역버스: M6405번, 1400번, 1401번</li>
+                            <li>• 송도컨벤시아 정류장 하차 (도보 1분)</li>
+                        </ul>
+                        
+                        <h4 class="font-medium text-stone-800 mb-4 mt-6 flex items-center">
+                            <i class="fas fa-car text-rose-300 mr-2"></i>
+                            자가용 이용시
+                        </h4>
+                        <ul class="space-y-2 text-sm text-stone-600">
+                            <li>• 서울 → 영동대교 → 인천대교 → 송도국제도시</li>
+                            <li>• 경기 → 제2경인고속도로 → 송도IC → 송도국제도시</li>
+                            <li>• 내비게이션: "송도컨벤시아" 검색</li>
                         </ul>
                     </div>
                 </div>

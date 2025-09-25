@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFloatingButtons();
     initScrollEffects();
     initMessageSystem();
+    initCherryBlossoms();
 });
 
 // 달력 초기화
@@ -463,3 +464,101 @@ window.addEventListener('online', () => {
 window.addEventListener('offline', () => {
     showSuccessMessage('인터넷 연결이 끊어졌습니다. 일부 기능이 제한될 수 있습니다.');
 });
+
+// Cherry Blossom Animation
+function initCherryBlossoms() {
+    const canvas = document.getElementById('cherry-canvas');
+    if (!canvas) return;
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    
+    const TOTAL = 50; // 꽃잎 개수를 줄여서 성능 최적화
+    const petalArray = [];
+    
+    // 꽃잎 이미지 (간단한 핑크색 원으로 대체)
+    function createPetalImage() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 20;
+        canvas.height = 20;
+        const ctx = canvas.getContext('2d');
+        
+        // 핑크색 꽃잎 모양 그리기
+        ctx.fillStyle = 'rgba(255, 182, 193, 0.7)';
+        ctx.beginPath();
+        ctx.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        ctx.fillStyle = 'rgba(255, 192, 203, 0.5)';
+        ctx.beginPath();
+        ctx.ellipse(10, 10, 6, 3, Math.PI / 4, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        return canvas;
+    }
+    
+    const petalImg = createPetalImage();
+    
+    class Petal {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height - canvas.height;
+            this.w = Math.random() * 15 + 5;
+            this.h = this.w;
+            this.opacity = Math.random() * 0.5 + 0.3;
+            this.flip = Math.random();
+            this.xSpeed = Math.random() * 2 - 1;
+            this.ySpeed = Math.random() * 1 + 1;
+            this.flipSpeed = Math.random() * 0.03;
+        }
+        
+        draw() {
+            if (this.y > canvas.height || this.x > canvas.width || this.x < 0) {
+                this.x = Math.random() * canvas.width;
+                this.y = -this.h;
+                this.xSpeed = Math.random() * 2 - 1;
+                this.ySpeed = Math.random() * 1 + 1;
+            }
+            
+            ctx.globalAlpha = this.opacity;
+            ctx.drawImage(
+                petalImg,
+                this.x,
+                this.y,
+                this.w * Math.abs(Math.cos(this.flip)),
+                this.h
+            );
+        }
+        
+        animate() {
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+            this.flip += this.flipSpeed;
+        }
+    }
+    
+    // 꽃잎 생성
+    for (let i = 0; i < TOTAL; i++) {
+        petalArray.push(new Petal());
+    }
+    
+    function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        petalArray.forEach(petal => {
+            petal.animate();
+            petal.draw();
+        });
+        
+        requestAnimationFrame(render);
+    }
+    
+    render();
+    
+    // 창 크기 변경시 캔버스 크기 조정
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
